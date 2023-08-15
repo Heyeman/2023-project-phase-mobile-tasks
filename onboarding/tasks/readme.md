@@ -13,8 +13,8 @@ Todo list
 
 
 ## Optimizations
+3 contracts(remote and local data source) have been implemented.
 
-On this version of the app, several Optimizations have been made. For instance, models have been implemented to interconnect existing data with dart objects, in addition, tests for those models have been written.
 
 ## Screenshots
 

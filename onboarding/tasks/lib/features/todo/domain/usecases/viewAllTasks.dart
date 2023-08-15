@@ -6,7 +6,7 @@ import 'package:flutter_application_1/features/todo/domain/entities/task.dart';
 import 'package:flutter_application_1/features/todo/domain/repositories/todo_repository.dart';
 
 class ViewAllTasks implements UseCaseList<TodoTask, Noparams> {
-  final NumberTriviaRepository repository;
+  final TodoTaskRepository repository;
 
   ViewAllTasks(this.repository);
   @override

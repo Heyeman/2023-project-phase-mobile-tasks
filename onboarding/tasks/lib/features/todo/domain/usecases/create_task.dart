@@ -7,7 +7,7 @@ import 'package:flutter_application_1/features/todo/domain/repositories/todo_rep
 import 'package:flutter_application_1/features/todo/presentation/pages/main.dart';
 
 class CreateTask implements UseCase<TodoTask, Params> {
-  final NumberTriviaRepository repository;
+  final TodoTaskRepository repository;
 
   CreateTask(this.repository);
   @override

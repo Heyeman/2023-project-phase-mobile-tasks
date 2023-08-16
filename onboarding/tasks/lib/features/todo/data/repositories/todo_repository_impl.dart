@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_application_1/core/error/exceptions.dart';
 import 'package:flutter_application_1/core/error/failures.dart';
 import 'package:flutter_application_1/features/todo/domain/entities/task.dart';
 import 'package:flutter_application_1/features/todo/domain/repositories/todo_repository.dart';
 
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/network/network_info.dart';
 import '../datasources/todotask_local_data_source.dart';
 import '../datasources/todotask_remote_data_source.dart';
 
@@ -32,13 +33,28 @@ class TodoTaskRepositoryImpl implements TodoTaskRepository {
   @override
   Future<Either<Failure, List<TodoTask>>> getAllTasks() {
     // TODO: implement getAllTasks
+    // return ;
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, TodoTask>> getTask(String id) {
-    // TODO: implement getTask
-    throw UnimplementedError();
+  Future<Either<Failure, TodoTask>> getTask(String id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteTodoTask = await remoteDataSource.getTask(id);
+        localDataSource.cacheTask(remoteTodoTask);
+        return Right(remoteTodoTask);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localTodoTask = await localDataSource.getTask(id);
+        return Right(localTodoTask);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 
   @override

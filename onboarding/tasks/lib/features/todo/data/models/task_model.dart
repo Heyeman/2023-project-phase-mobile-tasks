@@ -8,7 +8,7 @@ class TodoTaskModel extends TodoTask {
       required String id})
       : super(
             title: title, description: description, deadline: deadline, id: id);
-  factory TodoTaskModel.fromJson({required Map<String, dynamic> json}) {
+  factory TodoTaskModel.fromJson(Map<String, dynamic> json) {
     return TodoTaskModel(
         title: json['title'],
         description: json['description'],
